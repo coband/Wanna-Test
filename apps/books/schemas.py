@@ -1,15 +1,12 @@
-from ninja import ModelSchema, Schema
+from ninja import ModelSchema
 from apps.books.models import Book
-from datetime import date
 
 class BookSchema(ModelSchema):
-  class Meta:
-    model = Book
-    fields = ('id', 'title', 'author', 'ISBN', 'subject', 'published_date')
+    class Config:
+        model = Book
+        model_fields = ['id', 'title', 'author', 'ISBN', 'subject', 'published_year']
 
-class BookCreateSchema(Schema):
-  title: str
-  author: str
-  ISBN: str
-  subject: str
-  published_date: date 
+class BookCreateSchema(ModelSchema):
+    class Config:
+        model = Book
+        model_fields = ['title', 'author', 'ISBN', 'subject', 'published_year']
